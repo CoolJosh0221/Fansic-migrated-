@@ -38,6 +38,7 @@ async def on_message(message):
     if "LOL" in msg:
         await message.channel.send('🤣')
     if "HEHE" in msg:
+        await message.add_reaction('😂')
         await message.channel.send('haha')
     if "SAD" in msg:
         await message.channel.send(':(')
