@@ -42,6 +42,10 @@ async def on_message(message):
         await message.channel.send('haha')
     if "SAD" in msg:
         await message.channel.send(':(')
+    if "CHECKMATE" in msg:
+        await message.add_reaction('<:checkmate_black_256x:983718638022426634>')
+    if "HA" in msg:
+        await message.channel.send('HA')
 
 
 testing_servers = [877823624315301908]
