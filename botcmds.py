@@ -29,7 +29,7 @@ async def on_ready():
 async def on_message(message):
     msg = message.content
     msg = msg.upper()
-    if message.author == bot.user:
+    if message.author.bot:
         return
     if "XD" in msg:
         await message.channel.send('XDD')
