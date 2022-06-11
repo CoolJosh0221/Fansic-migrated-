@@ -126,6 +126,8 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
     embed.add_field(name="Avatar URL", value=f"[Here]({fetch_user.avatar})", inline=False)
     embed.add_field(name="ID", value=str(fetch_user.id), inline=False)
     embed.add_field(name="Joined time", value=f"<t:{round(fetch_user.joined_at.timestamp())}>", inline=True)
+    embed.add_field(name="Account Creation", value=f"<t:{round(fetch_user.created_at.timestamp())}>", inline=True)
+    embed.set_thumbnail(url=fetch_user.avatar)
 
     await ctx.respond("", embed=embed)
     
