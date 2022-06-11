@@ -46,9 +46,17 @@ async def on_message(message):
         await message.add_reaction('<:checkmate_black_256x:983718638022426634>')
     if "HA" in msg:
         await message.channel.send('HA')
-    if "@everyone" in msg or "@here" in msg:
+    if "@everyone" in message.content or "@here" in message.content:
         await message.add_reaction('📣')
-
+    if "SPAM" in msg:
+        embed = discord.Embed(
+            title="Do you want to spam?",
+            description="You can spam in <#941232755864391701> in the server: https://discord.gg/QwXXNGNkeh !",
+            color=discord.Colour.blurple(),
+        )
+        embed.set_image(url="https://cdn.discordapp.com/icons/877823624315301908/b2c3dc6917dc9779586b5166fa7eda64.png?size=4096")
+        embed.set_footer(text=f"Requested by {message.author.name}#{message.author.discriminator}", icon_url=message.author.avatar)
+        await message.channel.send(message.author.mention, embed=embed)
 
 testing_servers = [877823624315301908]
 
@@ -100,6 +108,17 @@ async def unmuteerror(ctx, error):
         await ctx.respond("You can't do this! You need to have moderate members permissions!")
     else:
         raise error
+    
+@bot.slash_command(name="whois", description="Get information from a specified user.")
+async def whois(ctx, user: Option(discord.Member, required = False)):
+    if user == None:
+        fetch_user = ctx.author
+    else:
+        fetch_user = user
+    
+    embed=discord.Embed
+
+    await ctx.respond(f"{fetch_user.name}#{fetch_user.discriminator}")
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
