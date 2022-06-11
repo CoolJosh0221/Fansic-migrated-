@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 import asyncio
 from discord import Option
-from datetime import timedelta
+from datetime import timedelta, datetime
 from discord.ext import commands
 from discord.ext.commands import MissingPermissions
 
@@ -123,11 +123,15 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
         description=fetch_user.mention,
         color=fetch_user.color,
     )
+    now = datetime.now()
+    current_time = now.strftime("%H:%M")
     embed.add_field(name="Avatar URL", value=f"[Here]({fetch_user.avatar})", inline=False)
     embed.add_field(name="ID", value=str(fetch_user.id), inline=False)
     embed.add_field(name="Joined time", value=f"<t:{round(fetch_user.joined_at.timestamp())}>", inline=True)
     embed.add_field(name="Account Creation", value=f"<t:{round(fetch_user.created_at.timestamp())}>", inline=True)
     embed.set_thumbnail(url=fetch_user.avatar)
+    embed.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator} | Today at {current_time}", icon_url=ctx.author.avatar)
+    embed.set_author(name="User Imformation", icon_url=fetch_user.avatar)
 
     await ctx.respond("", embed=embed)
     
