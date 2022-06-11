@@ -110,15 +110,24 @@ async def unmuteerror(ctx, error):
         raise error
     
 @bot.slash_command(name="whois", description="Get information from a specified user.")
-async def whois(ctx, user: Option(discord.Member, required = False)):
+async def whois(ctx, user: Option(discord.Member, default=None, required = False)):
     if user == None:
         fetch_user = ctx.author
     else:
         fetch_user = user
     
-    embed=discord.Embed
+            
+    
+    embed=discord.Embed(
+        title=f'{fetch_user.name}#{fetch_user.discriminator}',
+        description=fetch_user.mention,
+        color=fetch_user.color,
+    )
+    embed.add_field(name="Avatar URL", value=f"[Here]({fetch_user.avatar})", inline=False)
+    embed.add_field(name="ID", value=str(fetch_user.id), inline=False)
+    embed.add_field(name="Joined time", value=f"<t:{round(fetch_user.joined_at.timestamp())}>", inline=True)
 
-    await ctx.respond(f"{fetch_user.name}#{fetch_user.discriminator}")
+    await ctx.respond("", embed=embed)
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
