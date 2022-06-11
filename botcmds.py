@@ -46,6 +46,8 @@ async def on_message(message):
         await message.add_reaction('<:checkmate_black_256x:983718638022426634>')
     if "HA" in msg:
         await message.channel.send('HA')
+    if "@everyone" in msg or "@here" in msg:
+        await message.add_reaction('📣')
 
 
 testing_servers = [877823624315301908]
