@@ -11,7 +11,7 @@ load_dotenv() #load the dotenv module to prevent tokens from being seen by other
 
 
 from discord import guild
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.message_content = True
 
 bot = discord.Bot(intents=intents)
