@@ -154,7 +154,7 @@ async def dmannounce(ctx, title : Option(str, required=True), value : Option(str
             await member.send("", embed = embed)
         except discord.errors.HTTPException:
             continue
-        asyncio.sleep(0.5)
+        await asyncio.sleep(0.5)
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
