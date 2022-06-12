@@ -155,6 +155,14 @@ async def dmannounce(ctx, title : Option(str, required=True), value : Option(str
         except discord.errors.HTTPException:
             continue
         await asyncio.sleep(0.5)
+        
+@dmannounce.error
+async def dmannounceerror(ctx,error):
+    if isinstance(error, MissingPermissions):
+        await ctx.respond("You can't do this! You need to have moderate members permissions!", ephemeral=True) 
+    else:
+        raise error
+    
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
