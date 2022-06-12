@@ -135,5 +135,25 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
 
     await ctx.respond("", embed=embed)
     
+    
+@bot.slash_command(name="dmannounce", description="Announce something (DM)")
+@commands.has_permissions(moderate_members = True)
+async def dmannounce(ctx, title : Option(str, required=True), value : Option(str, required=True)):
+    embed = discord.Embed(
+        title = title,
+        description = value,
+        color = ctx.author.color,
+    )
+    
+    embed.set_author(name = f"Message from {ctx.author.name}#{ctx.author.discriminator}", icon_url = ctx.author.avatar)
+    embed.set_footer(text = ctx.guild.name, icon_url = ctx.guild.icon)
+    members = await ctx.guild.fetch_members(limit=None).flatten()
+    await ctx.respond("You may need to wait some seconds before the message can be delivered.", ephemeral=True)
+    for member in members:
+        try:
+            await member.send("", embed = embed)
+        except discord.errors.HTTPException:
+            continue
+    
 token = str(os.getenv("TOKEN"))
 bot.run(token)
