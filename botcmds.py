@@ -147,7 +147,6 @@ async def dmannounce(ctx, title : Option(str, required=True), value : Option(str
         description = value,
         color = ctx.author.color,
     )
-    
     embed.set_author(name = f"Message from {ctx.author.name}#{ctx.author.discriminator}", icon_url = ctx.author.avatar)
     embed.set_footer(text = ctx.guild.name, icon_url = ctx.guild.icon)
     members = await ctx.guild.fetch_members(limit=None).flatten()
@@ -168,14 +167,15 @@ async def dmannounceerror(ctx,error):
         await ctx.respond(f"This command is currently on cooldown. Wait {round(cooldown)} seconds to try again.", ephemeral=True)
     else:
         try:
-            raise error  # raise other errors so they aren't ignored
+            raise error    # raise other errors so they aren't ignored
         except Exception as e:
-            ctx.respond(e)
+            await ctx.respond(e)
+            print(e)
             
         embed = discord.Embed(
             title="Something went wrong!",
             description="Join [our server](https://discord.gg/QwXXNGNkeh) to report this issue.",
-            color="orange"
+            color=0xFF0000
         )
         await ctx.respond(error)
         await ctx.respond(embed=embed)
