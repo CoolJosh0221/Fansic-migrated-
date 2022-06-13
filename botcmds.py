@@ -169,16 +169,16 @@ async def dmannounceerror(ctx,error):
         try:
             raise error    # raise other errors so they aren't ignored
         except Exception as e:
-            await ctx.respond(e)
-            print(e)
+            await ctx.respond(f"```fix\n{e}```")
             
         embed = discord.Embed(
             title="Something went wrong!",
             description="Join [our server](https://discord.gg/QwXXNGNkeh) to report this issue.",
             color=0xFF0000
         )
-        await ctx.respond(error)
         await ctx.respond(embed=embed)
+        
+        raise error
     
     
 token = str(os.getenv("TOKEN"))
