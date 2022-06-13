@@ -1,4 +1,3 @@
-from cmath import e
 import discord
 from dotenv import load_dotenv
 import os
@@ -168,6 +167,13 @@ async def dmannounceerror(ctx,error):
         cooldown = error.retry_after
         await ctx.respond(f"This command is currently on cooldown. Wait {round(cooldown)} seconds to try again.", ephemeral=True)
     else:
+        embed = discord.Embed(
+            title="Something went wrong!",
+            description="Join [our server](https://discord.gg/QwXXNGNkeh) to report this issue.",
+            color="orange"
+        )
+        await ctx.respond(error)
+        await ctx.respond(embed=embed)
         raise error  # raise other errors so they aren't ignored
     
     
