@@ -1,3 +1,4 @@
+from cmath import e
 import discord
 from dotenv import load_dotenv
 import os
@@ -57,6 +58,8 @@ async def on_message(message):
         embed.set_image(url="https://cdn.discordapp.com/icons/877823624315301908/b2c3dc6917dc9779586b5166fa7eda64.png?size=4096")
         embed.set_footer(text=f"Requested by {message.author.name}#{message.author.discriminator}", icon_url=message.author.avatar)
         await message.channel.send(message.author.mention, embed=embed)
+        
+
 
 testing_servers = [877823624315301908]
 
@@ -138,6 +141,7 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
     
 @bot.slash_command(name="dmannounce", description="Announce something (DM)")
 @commands.has_permissions(moderate_members = True)
+@commands.cooldown(1, 60, commands.BucketType.user)  # the command can only be used once in 60 seconds
 async def dmannounce(ctx, title : Option(str, required=True), value : Option(str, required=True)):
     embed = discord.Embed(
         title = title,
@@ -160,8 +164,11 @@ async def dmannounce(ctx, title : Option(str, required=True), value : Option(str
 async def dmannounceerror(ctx,error):
     if isinstance(error, MissingPermissions):
         await ctx.respond("You can't do this! You need to have moderate members permissions!", ephemeral=True) 
+    elif isinstance(error, commands.CommandOnCooldown):
+        cooldown = error.retry_after
+        await ctx.respond(f"This command is currently on cooldown. Wait {round(cooldown)} seconds to try again.", ephemeral=True)
     else:
-        raise error
+        raise error  # raise other errors so they aren't ignored
     
     
 token = str(os.getenv("TOKEN"))
