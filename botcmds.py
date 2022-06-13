@@ -156,7 +156,7 @@ async def dmannounce(ctx, title : Option(str, required=True), value : Option(str
             await member.send("", embed = embed)
         except discord.errors.HTTPException:
             continue
-        await asyncio.sleep(5)
+        await asyncio.sleep(1)
         
 @dmannounce.error
 async def dmannounceerror(ctx,error):
@@ -179,7 +179,6 @@ async def dmannounceerror(ctx,error):
         await ctx.respond(embed=embed)
         
         raise error
-    
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
