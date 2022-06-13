@@ -167,6 +167,11 @@ async def dmannounceerror(ctx,error):
         cooldown = error.retry_after
         await ctx.respond(f"This command is currently on cooldown. Wait {round(cooldown)} seconds to try again.", ephemeral=True)
     else:
+        try:
+            raise error  # raise other errors so they aren't ignored
+        except Exception as e:
+            ctx.respond(e)
+            
         embed = discord.Embed(
             title="Something went wrong!",
             description="Join [our server](https://discord.gg/QwXXNGNkeh) to report this issue.",
@@ -174,7 +179,6 @@ async def dmannounceerror(ctx,error):
         )
         await ctx.respond(error)
         await ctx.respond(embed=embed)
-        raise error  # raise other errors so they aren't ignored
     
     
 token = str(os.getenv("TOKEN"))
