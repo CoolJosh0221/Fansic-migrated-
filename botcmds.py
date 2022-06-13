@@ -140,7 +140,7 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
     
 @bot.slash_command(name="dmannounce", description="Announce something (DM)")
 @commands.has_permissions(moderate_members = True)
-@commands.cooldown(1, 60, commands.BucketType.user)  # the command can only be used once in 60 seconds
+@commands.cooldown(1, 180, commands.BucketType.user)  # the command can only be used once in 60 seconds
 async def dmannounce(ctx, title : Option(str, required=True), value : Option(str, required=True)):
     embed = discord.Embed(
         title = title,
@@ -150,13 +150,13 @@ async def dmannounce(ctx, title : Option(str, required=True), value : Option(str
     embed.set_author(name = f"Message from {ctx.author.name}#{ctx.author.discriminator}", icon_url = ctx.author.avatar)
     embed.set_footer(text = ctx.guild.name, icon_url = ctx.guild.icon)
     members = await ctx.guild.fetch_members(limit=None).flatten()
-    await ctx.respond("You may need to wait some seconds before the message can be delivered.", ephemeral=True)
+    await ctx.respond("It may take a while before the message can be delivered to follow Discord TOS.", ephemeral=True)
     for member in members:
         try:
             await member.send("", embed = embed)
         except discord.errors.HTTPException:
             continue
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(5)
         
 @dmannounce.error
 async def dmannounceerror(ctx,error):
