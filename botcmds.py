@@ -143,7 +143,7 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
 @bot.slash_command(name="announce", description="Announce something in a channel")
 @commands.has_permissions(administrator = True)
 @commands.cooldown(1, 20, commands.BucketType.user)  # the command can only be used once in 60 seconds
-async def announce(ctx, title : Option(str, required=True), value : Option(str, required=True), annchannel : Option(discord.TextChannel, required=True),):
+async def announce(ctx, text : Option(str, required=True),title : Option(str, required=True), value : Option(str, required=True), annchannel : Option(discord.TextChannel, required=True),):
     embed = discord.Embed(
         title = title,
         description = value,
@@ -152,7 +152,7 @@ async def announce(ctx, title : Option(str, required=True), value : Option(str, 
     embed.set_author(name = f"Announcement from {ctx.author.name}#{ctx.author.discriminator}", icon_url = ctx.author.avatar)
     embed.set_footer(text = ctx.guild.name, icon_url = ctx.guild.icon)
     sending = await ctx.respond("Sending...")
-    await annchannel.send(embed = embed)
+    await annchannel.send(f"{text}", embed = embed)
     await sending.edit_original_message(content="Completed!")
 
         
