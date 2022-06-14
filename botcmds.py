@@ -83,9 +83,11 @@ async def timeout(ctx, member: Option(discord.Member, required = True), reason: 
     if reason == None:
         await member.timeout_for(duration)
         await ctx.respond(f"<@{member.id}> has been timed out for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}>.")
+        await member.send(f"You have been timed out for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}>.")
     else:
         await member.timeout_for(duration, reason = reason)
         await ctx.respond(f"<@{member.id}> has been timed out for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'.")
+        await member.send(f"You have been timed out for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'.")
 
 @timeout.error
 async def timeouterror(ctx, error):
