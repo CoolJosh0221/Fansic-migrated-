@@ -138,30 +138,26 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
     await ctx.respond("", embed=embed)
     
     
-@bot.slash_command(name="dmannounce", description="Announce something (DM)")
-@commands.has_permissions(moderate_members = True)
-@commands.cooldown(1, 180, commands.BucketType.user)  # the command can only be used once in 60 seconds
-async def dmannounce(ctx, title : Option(str, required=True), value : Option(str, required=True)):
+@bot.slash_command(name="announce", description="Announce something in a channel")
+@commands.has_permissions(administrator = True)
+@commands.cooldown(1, 20, commands.BucketType.user)  # the command can only be used once in 60 seconds
+async def announce(ctx, title : Option(str, required=True), value : Option(str, required=True), annchannel : Option(discord.TextChannel, required=True),):
     embed = discord.Embed(
         title = title,
         description = value,
         color = ctx.author.color,
     )
-    embed.set_author(name = f"Message from {ctx.author.name}#{ctx.author.discriminator}", icon_url = ctx.author.avatar)
+    embed.set_author(name = f"Announcement from {ctx.author.name}#{ctx.author.discriminator}", icon_url = ctx.author.avatar)
     embed.set_footer(text = ctx.guild.name, icon_url = ctx.guild.icon)
-    members = await ctx.guild.fetch_members(limit=None).flatten()
-    await ctx.respond("It may take a while before the message can be delivered to follow Discord TOS.", ephemeral=True)
-    for member in members:
-        try:
-            await member.send("", embed = embed)
-        except discord.errors.HTTPException:
-            continue
-        await asyncio.sleep(1)
+    sending = await ctx.respond("Sending...")
+    await annchannel.send(embed = embed)
+    await sending.edit_original_message(content="Completed!")
+
         
-@dmannounce.error
+@announce.error
 async def dmannounceerror(ctx,error):
     if isinstance(error, MissingPermissions):
-        await ctx.respond("You can't do this! You need to have moderate members permissions!", ephemeral=True) 
+        await ctx.respond("You can't do this! You need to have administrator permissions!", ephemeral=True) 
     elif isinstance(error, commands.CommandOnCooldown):
         cooldown = error.retry_after
         await ctx.respond(f"This command is currently on cooldown. Wait {round(cooldown)} seconds to try again.", ephemeral=True)
@@ -179,6 +175,8 @@ async def dmannounceerror(ctx,error):
         await ctx.respond(embed=embed)
         
         raise error
+    
+    
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
