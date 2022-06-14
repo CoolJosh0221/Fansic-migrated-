@@ -1,4 +1,5 @@
 import discord
+from discord.ui import Button, View
 from dotenv import load_dotenv
 import os
 import asyncio
@@ -177,8 +178,23 @@ async def dmannounceerror(ctx,error):
         await ctx.respond(embed=embed)
         
         raise error
+
+@bot.slash_command(name="info", description="Get the info of the bot")
+async def info(ctx):
+    button = Button(label="View GitHub Repository", style=discord.ButtonStyle.link, url="https://github.com/CoolJosh0221/Fansic")
+    view = View()
+    view.add_item(button)
     
+    embed = discord.Embed(
+        title="Info",
+        description="The bot is made by <@!847772018928779285> \nJoin our discord server: https://discord.gg/QwXXNGNkeh",
+        color=0xFF8800
+    )
+    embed.set_footer(text=f"Requested by {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.avatar)
+    embed.set_author(name="Bot Info")
+
     
+    await ctx.respond(embed=embed, view=view)
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
