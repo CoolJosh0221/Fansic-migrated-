@@ -155,9 +155,9 @@ async def announce(ctx, text : Option(str, required=True),title : Option(str, re
     )
     embed.set_author(name = f"Announcement from {ctx.author.name}#{ctx.author.discriminator}", icon_url = ctx.author.avatar)
     embed.set_footer(text = ctx.guild.name, icon_url = ctx.guild.icon)
-    sending = await ctx.respond("Sending...")
+    sending = await ctx.respond("Sending...", ephemeral = True)
     await annchannel.send(f"{text}", embed = embed)
-    await sending.edit_original_message(content="Completed!")
+    await sending.edit_original_message(content="Sended!")
 
         
 @announce.error
