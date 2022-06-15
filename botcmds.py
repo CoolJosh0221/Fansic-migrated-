@@ -23,8 +23,8 @@ bot = discord.Bot(intents=intents)
 async def on_ready():
     print(f"We have logged in as {bot.user}.")
     print("Bot is now ready!")
-    game = discord.Game("Developing...")
-    await bot.change_presence(status=discord.Status.dnd, activity=game)
+    #game = discord.Game("Developing...")
+    await bot.change_presence(status=discord.Status.streaming, activity=discord.Streaming(url="https://www.twitch.tv/mynameisjoshes0221", name=f"in {len(bot.guilds)} servers"))
 
 @bot.event
 async def on_message(message):
