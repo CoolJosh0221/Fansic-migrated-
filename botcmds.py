@@ -1,3 +1,4 @@
+from faulthandler import disable
 import discord
 import random
 from discord.ui import Button, View
@@ -197,6 +198,36 @@ async def info(ctx):
 
     
     await ctx.respond(embed=embed, view=view)
+
+@bot.slash_command(name="nitrogen", description="Gift you nitro.")
+async def nitrogen(ctx):
+    embed = discord.Embed(
+        title="You've been gifted a subscription!",
+        description=f"{ctx.author.name}#{ctx.author.discriminator} gifted you **nitro classic** for ***1 year***!",
+        color=0x5964f3
+    )
+    embed.set_thumbnail(url="https://www.nukebot.org/Nitro.png")
+    
+    embed2 = discord.Embed(
+        title="You've been gifted a subscription!",
+        description="Hmm, it seems someone already claimed this gift.",
+        color=0x5964f3
+    )
+    embed2.set_thumbnail(url="https://www.nukebot.org/Nitro.png")
+    button=Button(label="Accept", style=discord.ButtonStyle.green, emoji="<a:the_nitro:986455622260244510>")
+    button2=Button(label="Accept", style=discord.ButtonStyle.green, emoji="<a:the_nitro:986455622260244510>", disabled=True)
+    async def button_callback(interaction):
+        await interaction.response.edit_message(embed=embed2, view=view2)
+        await interaction.followup.send("https://imgur.com/NQinKJB", ephemeral=True)
+        
+    
+    button.callback = button_callback
+    view = View()
+    view2 = View()
+    view2.add_item(button2)
+    view.add_item(button)
+    await ctx.respond("✅", ephemeral=True)
+    await ctx.send(embed=embed, view=view)
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
