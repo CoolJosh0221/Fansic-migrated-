@@ -256,15 +256,74 @@ async def nitrogen(ctx):
     
     
     
-@bot.slash_command(name="gcreate", description="Create a giveaway (interactive setup)")
-async def gcreate(ctx):
-    await ctx.respond("What do you want to giveaway? (e.x 1 x Nitro)")
-    def name(m):
-            return m.author == ctx.author and m.channel == ctx.channel
+# @bot.slash_command(name="gcreate", description="Create a giveaway (interactive setup)")
+# async def gcreate(ctx):
+#     embed=discord.Embed(
+#         title="What do you want to giveaway?",
+#         description="Example: `1 x Nitro`",
+#         color=discord.Colour.orange()
+#     )
+    
+#     timeout=discord.Embed(
+#         title="Your Time Ran Out!",
+#         description="Please try again using /gcreate",
+#         color=discord.Color.red()
+#     )
+#     await ctx.respond(embed=embed)
+#     def name(m):
+#         return m.author == ctx.author and m.channel == ctx.channel
         
-    msg = await bot.wait_for('message', check=name)
-    await ctx.channel.send(f'The giveaway name is now "{msg.content}".')
-    name = msg.content
+        
+#     try:
+#         msg = await bot.wait_for('message', check=name, timeout=60.0)
+#     except asyncio.TimeoutError:
+#         await ctx.channel.send(embed=timeout)
+#         return
+    
+    
+#     embed=discord.Embed(
+#         title="Which channel should it be?",
+#         description="Simply mention the channel.",
+#         color=discord.Colour.orange()
+#     )
+    
+    
+#     await ctx.channel.send(embed=embed)
+    
+#     async def channel(m):
+        
+    
+#     try:
+#         gchannel = await bot.wait_for('message', check=channel, timeout=60.0)
+#     except asyncio.TimeoutError:
+#         await ctx.channel.send(embed=timeout)
+#         return
+    
+#     name = msg.content
+#     #channel = bot.get_channel(int(gchannel.content))
+    
+    
+@bot.slash_command(name="gstart", description="Start a giveaway")
+async def gstart(ctx, gchannel: Option(discord.TextChannel, required=True), prize: Option(str, required=True), time: Option(int, "Time (seconds)", required=True)):
+    await ctx.respond("Giveaway created.", ephemeral=True)
+    end_time = round(datetime.timestamp(datetime.now()) + time)
+    embed=discord.Embed(
+        title=prize,
+        description=f"React with <a:tada2:987204661838753792> to enter!\nEnds in: <t:{end_time}:R>\nHosted by {ctx.author.mention}",
+        color=discord.Color.orange()
+    )
+    embed.set_author(name="GIVEAWAY TIME!", icon_url="https://i.imgur.com/DDric14.png")
+    giveaway_msg = await gchannel.send("<a:tada3:987204676292313108> **GIVEAWAY STARTED** <a:tada3:987204676292313108>", embed=embed)
+    await giveaway_msg.add_reaction("<a:tada2:987204661838753792>")
+    
+    await asyncio.sleep(time)
+    new_message = await gchannel.fetch_message(giveaway_msg.id)
+    users = await new_message.reactions[0].users().flatten()
+    users.pop(users.index(bot.user))
+    winner = random.choice(users)
+    
+    await gchannel.send(f"**Congrats!** {winner.mention}, you won **{prize}**!")
+    
     
     
 token = str(os.getenv("TOKEN"))
