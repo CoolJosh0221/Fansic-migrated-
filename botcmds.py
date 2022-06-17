@@ -12,7 +12,6 @@ from better_profanity import profanity
 
 load_dotenv() #load the dotenv module to prevent tokens from being seen by others
 profanity.load_censor_words()
-os.remove("swear.txt")
 
 
 from discord import guild
