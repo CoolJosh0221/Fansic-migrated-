@@ -53,15 +53,15 @@ async def on_message(message):
         await message.channel.send('HA')
     if "@everyone" in message.content or "@here" in message.content:
         await message.add_reaction('📣')
-    if "SPAM" in msg:
-        embed = discord.Embed(
-            title="Do you want to spam?",
-            description="You can spam in <#941232755864391701> in the server: https://discord.gg/QwXXNGNkeh !",
-            color=discord.Colour.blurple(),
-        )
-        embed.set_image(url="https://cdn.discordapp.com/icons/877823624315301908/b2c3dc6917dc9779586b5166fa7eda64.png?size=4096")
-        embed.set_footer(text=f"Requested by {message.author.name}#{message.author.discriminator}", icon_url=message.author.avatar)
-        await message.channel.send(message.author.mention, embed=embed)
+    # if "SPAM" in msg:
+    #     embed = discord.Embed(
+    #         title="Do you want to spam?",
+    #         description="You can spam in <#941232755864391701> in the server: https://discord.gg/QwXXNGNkeh !",
+    #         color=discord.Colour.blurple(),
+    #     )
+    #     embed.set_image(url="https://cdn.discordapp.com/icons/877823624315301908/b2c3dc6917dc9779586b5166fa7eda64.png?size=4096")
+    #     embed.set_footer(text=f"Requested by {message.author.name}#{message.author.discriminator}", icon_url=message.author.avatar)
+    #     await message.channel.send(message.author.mention, embed=embed)
         
     if profanity.contains_profanity(message.content):
         if message.author.guild_permissions.moderate_members:
