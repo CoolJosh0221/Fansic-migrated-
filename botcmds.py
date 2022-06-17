@@ -1,7 +1,6 @@
-from faulthandler import disable
 import discord
 import random
-from discord.ui import Button, View
+from discord.ui import Button, View, InputText, Modal
 from dotenv import load_dotenv
 import os
 import asyncio
@@ -9,8 +8,11 @@ from discord import Option
 from datetime import timedelta, datetime
 from discord.ext import commands
 from discord.ext.commands import MissingPermissions
+from better_profanity import profanity
 
 load_dotenv() #load the dotenv module to prevent tokens from being seen by others
+profanity.load_censor_words()
+os.remove("swear.txt")
 
 
 from discord import guild
@@ -61,6 +63,30 @@ async def on_message(message):
         embed.set_image(url="https://cdn.discordapp.com/icons/877823624315301908/b2c3dc6917dc9779586b5166fa7eda64.png?size=4096")
         embed.set_footer(text=f"Requested by {message.author.name}#{message.author.discriminator}", icon_url=message.author.avatar)
         await message.channel.send(message.author.mention, embed=embed)
+        
+    if profanity.contains_profanity(message.content):
+        if message.author.guild_permissions.moderate_members:
+            return
+        
+        
+        await message.delete()
+        await message.channel.send(f"========================\n{profanity.censor(message.content, '#')} \n\n - **{message.author.name}#{message.author.discriminator}**")
+        embed = discord.Embed(
+            title="Don't swear/curse!",
+            description="Do not swear/curse anymore otherwise we will punish you!",
+            color=discord.Colour.red()
+        )
+        
+        await message.channel.send(content=message.author.mention, embed=embed)
+        with open('swear.txt', 'w') as f:
+            f.write(message.content)
+        file = discord.File("swear.txt")
+        await message.guild.owner.send(f"{message.author.name}#{message.author.discriminator} sweared/cursed id = {message.author.id}", file=file)
+        
+        
+
+        
+        
         
 
 
@@ -228,6 +254,19 @@ async def nitrogen(ctx):
     view.add_item(button)
     await ctx.respond("✅", ephemeral=True)
     await ctx.send(embed=embed, view=view)
+    
+    
+    
+@bot.slash_command(name="gcreate", description="Create a giveaway (interactive setup)")
+async def gcreate(ctx):
+    await ctx.respond("What do you want to giveaway? (e.x 1 x Nitro)")
+    def name(m):
+            return m.author == ctx.author and m.channel == ctx.channel
+        
+    msg = await bot.wait_for('message', check=name)
+    await ctx.channel.send(f'The giveaway name is now "{msg.content}".')
+    name = msg.content
+    
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
