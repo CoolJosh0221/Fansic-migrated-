@@ -320,9 +320,32 @@ async def gstart(ctx, gchannel: Option(discord.TextChannel, required=True), priz
     new_message = await gchannel.fetch_message(giveaway_msg.id)
     users = await new_message.reactions[0].users().flatten()
     users.pop(users.index(bot.user))
-    winner = random.choice(users)
+    entrants = discord.Embed(
+        title=None,
+        description=f"**{len(users)}** entrants ↗"
+    ) 
     
-    await gchannel.send(f"**Congrats!** {winner.mention}, you won **{prize}**!")
+    if users == []:
+        await gchannel.send("No valid entrants, so a winner could not be determined!", embed=entrants)
+        return
+    
+    winner = random.choice(users)
+    embed = discord.Embed(
+        title=prize,
+        description=f"Winner: {winner.mention}\nEnds in: <t:{end_time}:R>\nHosted by {ctx.author.mention}",
+        color=discord.Color.orange()
+    )
+    
+    embed.set_author(name="GIVEAWAY TIME!", icon_url="https://i.imgur.com/DDric14.png")
+    await giveaway_msg.edit("<a:tada3:987204676292313108> **GIVEAWAY ENDED** <a:tada3:987204676292313108>", embed=embed)
+    
+    ann = await gchannel.send(f"**Congrats!** {winner.mention}, you won **{prize}**!", embed=entrants)
+    congrats = ["🇨", "🇴", "🇳", "🇬", "🇷", "🇦", "🇹", "🇸"]
+    
+    
+    for emoji in congrats:
+        await ann.add_reaction(emoji)
+        
     
     
     
