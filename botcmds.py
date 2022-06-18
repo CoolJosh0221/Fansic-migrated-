@@ -40,8 +40,6 @@ async def on_message(message):
         await message.channel.send('XDD')
     if "WOW" in msg:
         await message.channel.send('Oh wow.')
-    if "LOL" in msg:
-        await message.channel.send('🤣')
     if "HEHE" in msg:
         await message.add_reaction('😂')
         await message.channel.send('haha')
@@ -49,8 +47,6 @@ async def on_message(message):
         await message.channel.send(':(')
     if "CHECKMATE" in msg:
         await message.add_reaction('<:checkmate_black_256x:983718638022426634>')
-    if "HA" in msg:
-        await message.channel.send('HA')
     if "@everyone" in message.content or "@here" in message.content:
         await message.add_reaction('📣')
     # if "SPAM" in msg:
