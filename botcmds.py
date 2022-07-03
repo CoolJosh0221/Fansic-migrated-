@@ -350,9 +350,9 @@ async def gstart(ctx, gchannel: Option(discord.TextChannel, required=True), priz
         await ann.add_reaction(emoji)
         
     
-for file in os.listdir("./cogs"):
-    if file.endswith(".py"):
-        bot.load_extension("cogs." + file[:-3])
+# for file in os.listdir("./cogs"):
+#     if file.endswith(".py"):
+#         bot.load_extension("cogs." + file[:-3])
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
