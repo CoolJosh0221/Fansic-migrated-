@@ -4,12 +4,14 @@ from discord.ui import Button, View, InputText, Modal
 from dotenv import load_dotenv
 import os
 import asyncio
+import asyncpg
 from discord import Option
 from datetime import timedelta, datetime
 from discord.ext import commands
 from discord.ext.commands import MissingPermissions
 from better_profanity import profanity
 
+    
 load_dotenv() #load the dotenv module to prevent tokens from being seen by others
 profanity.load_censor_words()
 
@@ -19,6 +21,11 @@ intents = discord.Intents.all()
 intents.message_content = True
 
 bot = discord.Bot(intents=intents)
+
+
+async def connect():
+    sql = str(os.getenv("SQL"))
+    conn = await asyncpg.connect(sql)
 
 
 
@@ -343,7 +350,9 @@ async def gstart(ctx, gchannel: Option(discord.TextChannel, required=True), priz
         await ann.add_reaction(emoji)
         
     
-    
+for file in os.listdir("./cogs"):
+    if file.endswith(".py"):
+        bot.load_extension("cogs." + file[:-3])
     
 token = str(os.getenv("TOKEN"))
 bot.run(token)
