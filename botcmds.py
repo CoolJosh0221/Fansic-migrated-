@@ -349,6 +349,19 @@ async def gstart(ctx, gchannel: Option(discord.TextChannel, required=True), priz
     for emoji in congrats:
         await ann.add_reaction(emoji)
         
+        
+@bot.slash_command(name="suggest", description="Make a suggestion for the bot.", )
+async def suggest(ctx, suggestion: Option(str, required=True)):
+    channel = bot.get_channel(996944121073782914)
+    embed = discord.Embed(title = f"Suggestion by {ctx.author.name}#{ctx.author.discriminator}:", 
+                          description=f"{ctx.author.mention}: {suggestion}",
+                          color = ctx.author.color,)
+    embed.set_footer(text=ctx.guild, icon_url=ctx.guild.icon)
+    msg = await channel.send(embed = embed)
+    await ctx.respond("We've posted your suggestion in our support server!",ephemeral=True)
+    await msg.add_reaction("👍")
+    await msg.add_reaction("👎")
+        
     
 # for file in os.listdir("./cogs"):
 #     if file.endswith(".py"):
