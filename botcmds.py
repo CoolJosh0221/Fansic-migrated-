@@ -176,6 +176,7 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
 @commands.has_permissions(administrator = True)
 @commands.cooldown(1, 20, commands.BucketType.user)  # the command can only be used once in 60 seconds
 async def announce(ctx, text : Option(str, required=True),title : Option(str, required=True), value : Option(str, required=True), annchannel : Option(discord.TextChannel, required=True),):
+    print(annchannel.id)
     embed = discord.Embed(
         title = title,
         description = value,
@@ -361,7 +362,12 @@ async def suggest(ctx, suggestion: Option(str, required=True)):
     await ctx.respond("We've posted your suggestion in our support server!",ephemeral=True)
     await msg.add_reaction("👍")
     await msg.add_reaction("👎")
-        
+
+
+@bot.slash_command(name="say", description="Make the bot say something.",)
+async def say(ctx, msg: Option(str, required=True)):
+    await ctx.channel.send(msg)
+    await ctx.respond("Message sent.", ephemeral=True)
     
 # for file in os.listdir("./cogs"):
 #     if file.endswith(".py"):
