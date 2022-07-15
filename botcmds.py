@@ -368,6 +368,24 @@ async def suggest(ctx, suggestion: Option(str, required=True)):
 async def say(ctx, msg: Option(str, required=True)):
     await ctx.channel.send(msg)
     await ctx.respond("Message sent.", ephemeral=True)
+
+
+@bot.slash_command(name = "lock", description="Lock the channel")
+@commands.has_permissions(manage_channels=True)
+async def lock(ctx):
+    await ctx.channel.set_permissions(ctx.guild.default_role,send_messages=False)
+    await ctx.channel.send(f'** {ctx.channel.mention} Channel has been locked **')
+
+    await ctx.respond("Channel has been locked",ephemeral=True)
+
+@bot.slash_command(name = "unlock", description="Unlock the channel")
+@commands.has_permissions(manage_channels=True)
+async def unlock(ctx):
+    await ctx.channel.set_permissions(ctx.guild.default_role,send_messages=True)
+    await ctx.channel.send(f'** {ctx.channel.mention} Channel has been unlocked **')
+
+    await ctx.respond("Channel has been unlocked", ephemeral=True)
+    
     
 # for file in os.listdir("./cogs"):
 #     if file.endswith(".py"):
