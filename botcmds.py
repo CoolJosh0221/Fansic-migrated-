@@ -26,6 +26,8 @@ bot = discord.Bot(intents=intents)
 async def connect():
     sql = str(os.getenv("SQL"))
     conn = await asyncpg.connect(sql)
+    
+    
 
 
 
@@ -33,6 +35,10 @@ async def connect():
 async def on_ready():
     print(f"We have logged in as {bot.user}.")
     print("Bot is now ready!")
+    for guild in bot.guilds:
+        print(guild.name)
+        link = await guild.text_channels[0].create_invite()
+        print(link)
     while True:
         await bot.change_presence(status=discord.Status.streaming, activity=discord.Streaming(url="https://www.twitch.tv/mynameisjoshes0221", name=f"in {len(bot.guilds)} servers"))
         await asyncio.sleep(20)
@@ -175,7 +181,7 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
 @bot.slash_command(name="announce", description="Announce something in a channel")
 @commands.has_permissions(administrator = True)
 @commands.cooldown(1, 20, commands.BucketType.user)  # the command can only be used once in 60 seconds
-async def announce(ctx, text : Option(str, required=True),title : Option(str, required=True), value : Option(str, required=True), annchannel : Option(discord.TextChannel, required=True),):
+async def announce(ctx, text : Option(str, required=True),title : Option(str, required=True), value : Option(str, required=True), annchannel : Option(discord.TextChannel, channel_types=[discord.ChannelType(5)], required=True),):
     print(annchannel.id)
     embed = discord.Embed(
         title = title,
