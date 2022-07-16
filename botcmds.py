@@ -182,7 +182,7 @@ async def whois(ctx, user: Option(discord.Member, default=None, required = False
 @bot.slash_command(name="announce", description="Announce something in a channel")
 @commands.has_permissions(administrator = True)
 @commands.cooldown(1, 20, commands.BucketType.user)  # the command can only be used once in 60 seconds
-async def announce(ctx, text : Option(str, required=False),title : Option(str, required=True), value : Option(str, required=True), annchannel : Option(discord.TextChannel, channel_types=[discord.ChannelType(5)], required=True),):
+async def announce(ctx ,title : Option(str, required=True), value : Option(str, required=True), annchannel : Option(discord.TextChannel, channel_types=[discord.ChannelType(5)], required=True),text : Option(str, required=False)):
     print(annchannel.id)
     embed = discord.Embed(
         title = title,
