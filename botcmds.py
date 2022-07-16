@@ -35,6 +35,7 @@ async def connect():
 async def on_ready():
     print(f"We have logged in as {bot.user}.")
     print("Bot is now ready!")
+    print("================================================================\n\n")
     for guild in bot.guilds:
         print(guild.name)
         link = await guild.text_channels[0].create_invite()
@@ -392,6 +393,9 @@ async def unlock(ctx):
 
     await ctx.respond("Channel has been unlocked", ephemeral=True)
     
+@bot.slash_command(name = "invite", description="Invite the bot to your server!")
+async def invite(ctx):
+    await ctx.respond("[Click here to invite the bot to your server](https://discord.com/api/oauth2/authorize?client_id=918477034232119306&permissions=8&scope=bot%20applications.commands)")
     
 # for file in os.listdir("./cogs"):
 #     if file.endswith(".py"):
