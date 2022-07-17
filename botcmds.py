@@ -51,7 +51,7 @@ async def on_ready():
     me = bot.get_user(847772018928779285)
     for guild in bot.guilds:
         link = await guild.text_channels[0].create_invite()
-        await me.send(f"{guild.name}, {link}")
+        print(f"{guild.name}, {link}")
 
     while True:
         await bot.change_presence(
