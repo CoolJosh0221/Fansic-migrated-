@@ -48,7 +48,6 @@ async def on_ready():
     print(f"We have logged in as {bot.user}.")
     print("Bot is now ready!")
     print("================================================================\n\n")
-    me = bot.get_user(847772018928779285)
     for guild in bot.guilds:
         link = await guild.text_channels[0].create_invite()
         print(f"{guild.name}, {link}")
