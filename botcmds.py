@@ -147,7 +147,7 @@ async def whois(ctx, user: Option(discord.Member, default=None, required=False))
 @commands.has_permissions(administrator=True)
 @commands.cooldown(
     1, 20, commands.BucketType.user
-)  # the command can only be used once in 60 seconds
+)  # the command can only be used once in 20  seconds
 async def announce(
     ctx,
     title: Option(str, required=True),
@@ -341,7 +341,6 @@ async def suggest(ctx, suggestion: Option(str, required=True)):
 )
 @commands.has_permissions(moderate_members=True)
 async def say(ctx, msg: Option(str, required=True)):
-    1/0
     await ctx.channel.send(msg)
     await ctx.respond("Message sent.", ephemeral=True)
 
