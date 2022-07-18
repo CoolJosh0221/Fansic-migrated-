@@ -88,6 +88,22 @@ class Mod(commands.Cog):
         else:
             raise error
 
+    @commands.slash_command(name="lock", description="Lock the channel")
+    @commands.has_permissions(manage_channels=True)
+    async def lock(self, ctx):
+        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=False)
+        await ctx.channel.send(f"** {ctx.channel.mention} Channel has been locked **")
+
+        await ctx.respond("Channel has been locked", ephemeral=True)
+
+    @commands.slash_command(name="unlock", description="Unlock the channel")
+    @commands.has_permissions(manage_channels=True)
+    async def unlock(self, ctx):
+        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
+        await ctx.channel.send(f"** {ctx.channel.mention} Channel has been unlocked **")
+
+        await ctx.respond("Channel has been unlocked", ephemeral=True)
+
 
 def setup(bot):
     bot.add_cog(Mod(bot))

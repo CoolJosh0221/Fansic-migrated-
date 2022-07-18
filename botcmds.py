@@ -1,4 +1,5 @@
 from discord import guild
+from customized_functions.handle_error import handle_error
 import asyncio
 import os
 import random
@@ -28,19 +29,6 @@ bot = discord.Bot(intents=intents)
 async def connect():
     sql = str(os.getenv("SQL"))
     conn = await asyncpg.connect(sql)
-
-
-def handle_error(error_msg):
-    embed = discord.Embed(
-        title="Something went wrong!",
-        description="Join [our server](https://discord.gg/QwXXNGNkeh) to report this issue.",
-        color=0xFF0000,
-    )
-    try:
-        raise error_msg  # raise other errors so they aren't ignored
-    except Exception as e:
-        print(e)
-        return [e, embed]
 
 
 @bot.event
@@ -82,15 +70,6 @@ async def on_message(message):
         await message.add_reaction("<:checkmate_black_256x:983718638022426634>")
     if "@everyone" in message.content or "@here" in message.content:
         await message.add_reaction("📣")
-    # if "SPAM" in msg:
-    #     embed = discord.Embed(
-    #         title="Do you want to spam?",
-    #         description="You can spam in <#941232755864391701> in the server: https://discord.gg/QwXXNGNkeh !",
-    #         color=discord.Colour.blurple(),
-    #     )
-    #     embed.set_image(url="https://cdn.discordapp.com/icons/877823624315301908/b2c3dc6917dc9779586b5166fa7eda64.png?size=4096")
-    #     embed.set_footer(text=f"Requested by {message.author.name}#{message.author.discriminator}", icon_url=message.author.avatar)
-    #     await message.channel.send(message.author.mention, embed=embed)
 
     if profanity.contains_profanity(message.content):
         if message.author.guild_permissions.moderate_members:
@@ -124,85 +103,6 @@ testing_servers = [877823624315301908]
 )
 async def check(ctx):
     await ctx.respond(f"**I am working!** \n\nLatency: {bot.latency*1000} ms.")
-
-
-# @bot.slash_command(name="timeout", description="mutes/timeouts a member")
-# @commands.has_permissions(moderate_members=True)
-# async def timeout(
-#     ctx,
-#     member: Option(discord.Member, required=True),
-#     reason: Option(str, required=False),
-#     days: Option(int, max_value=27, default=0, required=False),
-#     hours: Option(int, default=0, required=False),
-#     minutes: Option(int, default=0, required=False),
-#     seconds: Option(int, default=0, required=False),
-# ):  # setting each value with a default value of 0 reduces a lot of the code
-#     if member.id == ctx.author.id:
-#         await ctx.respond("You can't timeout yourself!")
-#         return
-#     if member.guild_permissions.moderate_members:
-#         await ctx.respond("You can't do this, this person is a moderator!")
-#         return
-#     duration = timedelta(days=days, hours=hours,
-#                          minutes=minutes, seconds=seconds)
-#     if duration >= timedelta(days=28):  # added to check if time exceeds 28 days
-#         await ctx.respond(
-#             "I can't mute someone for more than 28 days!", ephemeral=True
-#         )  # responds, but only the author can see the response
-#         return
-#     if reason == None:
-#         await member.timeout_for(duration)
-#         await ctx.respond(
-#             f"<@{member.id}> has been timed out for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}>."
-#         )
-#         await member.send(
-#             f"You have been timed out for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}>."
-#         )
-#     else:
-#         await member.timeout_for(duration, reason=reason)
-#         await ctx.respond(
-#             f"<@{member.id}> has been timed out for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'."
-#         )
-#         await member.send(
-#             f"You have been timed out for {days} days, {hours} hours, {minutes} minutes, and {seconds} seconds by <@{ctx.author.id}> for '{reason}'."
-#         )
-
-
-# @timeout.error
-# async def timeouterror(ctx, error):
-#     if isinstance(error, MissingPermissions):
-#         await ctx.respond(
-#             "You can't do this! You need to have moderate members permissions!"
-#         )
-#     else:
-#         raise error
-
-
-# @bot.slash_command(name="unmute", description="unmutes/untimeouts a member")
-# @commands.has_permissions(moderate_members=True)
-# async def unmute(
-#     ctx,
-#     member: Option(discord.Member, required=True),
-#     reason: Option(str, required=False),
-# ):
-#     if reason == None:
-#         await member.remove_timeout()
-#         await ctx.respond(f"<@{member.id}> has been untimed out by <@{ctx.author.id}>.")
-#     else:
-#         await member.remove_timeout(reason=reason)
-#         await ctx.respond(
-#             f"<@{member.id}> has been untimed out by <@{ctx.author.id}> for '{reason}'."
-#         )
-
-
-# @unmute.error
-# async def unmuteerror(ctx, error):
-#     if isinstance(error, MissingPermissions):
-#         await ctx.respond(
-#             "You can't do this! You need to have moderate members permissions!"
-#         )
-#     else:
-#         raise error
 
 
 @bot.slash_command(name="whois", description="Get information from a specified user.")
@@ -357,53 +257,6 @@ async def nitrogen(ctx):
     await ctx.send(embed=embed, view=view)
 
 
-# @bot.slash_command(name="gcreate", description="Create a giveaway (interactive setup)")
-# async def gcreate(ctx):
-#     embed=discord.Embed(
-#         title="What do you want to giveaway?",
-#         description="Example: `1 x Nitro`",
-#         color=discord.Colour.orange()
-#     )
-
-#     timeout=discord.Embed(
-#         title="Your Time Ran Out!",
-#         description="Please try again using /gcreate",
-#         color=discord.Color.red()
-#     )
-#     await ctx.respond(embed=embed)
-#     def name(m):
-#         return m.author == ctx.author and m.channel == ctx.channel
-
-
-#     try:
-#         msg = await bot.wait_for('message', check=name, timeout=60.0)
-#     except asyncio.TimeoutError:
-#         await ctx.channel.send(embed=timeout)
-#         return
-
-
-#     embed=discord.Embed(
-#         title="Which channel should it be?",
-#         description="Simply mention the channel.",
-#         color=discord.Colour.orange()
-#     )
-
-
-#     await ctx.channel.send(embed=embed)
-
-#     async def channel(m):
-
-
-#     try:
-#         gchannel = await bot.wait_for('message', check=channel, timeout=60.0)
-#     except asyncio.TimeoutError:
-#         await ctx.channel.send(embed=timeout)
-#         return
-
-#     name = msg.content
-#     #channel = bot.get_channel(int(gchannel.content))
-
-
 @bot.slash_command(name="gstart", description="Start a giveaway")
 async def gstart(
     ctx,
@@ -488,6 +341,7 @@ async def suggest(ctx, suggestion: Option(str, required=True)):
 )
 @commands.has_permissions(moderate_members=True)
 async def say(ctx, msg: Option(str, required=True)):
+    1/0
     await ctx.channel.send(msg)
     await ctx.respond("Message sent.", ephemeral=True)
 
@@ -501,24 +355,6 @@ async def say_error(ctx, error):
     else:
         result = handle_error(error)
         await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
-
-
-@bot.slash_command(name="lock", description="Lock the channel")
-@commands.has_permissions(manage_channels=True)
-async def lock(ctx):
-    await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=False)
-    await ctx.channel.send(f"** {ctx.channel.mention} Channel has been locked **")
-
-    await ctx.respond("Channel has been locked", ephemeral=True)
-
-
-@bot.slash_command(name="unlock", description="Unlock the channel")
-@commands.has_permissions(manage_channels=True)
-async def unlock(ctx):
-    await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
-    await ctx.channel.send(f"** {ctx.channel.mention} Channel has been unlocked **")
-
-    await ctx.respond("Channel has been unlocked", ephemeral=True)
 
 
 @bot.slash_command(name="invite", description="Invite the bot to your server!")
