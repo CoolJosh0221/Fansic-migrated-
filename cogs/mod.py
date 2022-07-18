@@ -1,4 +1,8 @@
+import asyncio
 from datetime import timedelta
+from http import client
+from customized_functions.handle_error import handle_error
+
 from discord.ext import commands
 import discord
 from typing import Optional
@@ -60,7 +64,8 @@ class Mod(commands.Cog):
                 "You can't do this! You need to have moderate members permissions!"
             )
         else:
-            raise error
+            result = handle_error(error)
+            await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
 
     @commands.slash_command(name="unmute", description="unmutes/untimeouts a member")
     @commands.has_permissions(moderate_members=True)
@@ -86,7 +91,8 @@ class Mod(commands.Cog):
                 "You can't do this! You need to have moderate members permissions!"
             )
         else:
-            raise error
+            result = handle_error(error)
+            await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
 
     @commands.slash_command(name="lock", description="Lock the channel")
     @commands.has_permissions(manage_channels=True)
@@ -103,6 +109,36 @@ class Mod(commands.Cog):
         await ctx.channel.send(f"** {ctx.channel.mention} Channel has been unlocked **")
 
         await ctx.respond("Channel has been unlocked", ephemeral=True)
+
+    @commands.slash_command(name="kick", description="Kicks a member from the server")
+    @commands.has_permissions(manage_members=True)
+    async def kick(self, ctx, member: Option(discord.Member, required=True), reason: Option(str) = None):
+        if reason == None:
+            reason = "No reason provided"
+        if member in ctx.guild.members:
+            await ctx.guild.kick(member)
+            await ctx.respond(f'User {member.mention} has been kicked for {reason} by {ctx.author.mention}')
+        elif member.guild_permissions.moderate_members:
+            await ctx.respond("You can't do this, this person is a moderator!")
+            return
+        elif ctx.author == member:
+            await ctx.respond("You can't kick yourself, leave this server instead 😆")
+            return
+        elif member not in ctx.guild.members:
+            await ctx.respond("You can't kick a user that is not in this server!")
+            return
+        else:
+            pass
+
+    @kick.error
+    async def timeouterror(self, ctx, error):
+        if isinstance(error, MissingPermissions):
+            await ctx.respond(
+                "You can't do this! You need to have moderate members permissions!"
+            )
+        else:
+            result = handle_error(error)
+            await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
 
 
 def setup(bot):
