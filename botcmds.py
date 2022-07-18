@@ -36,9 +36,6 @@ async def on_ready():
     print(f"We have logged in as {bot.user}.")
     print("Bot is now ready!")
     print("================================================================\n\n")
-    for guild in bot.guilds:
-        link = await guild.text_channels[0].create_invite()
-        print(f"{guild.name}, {link}")
 
     while True:
         await bot.change_presence(
@@ -190,7 +187,7 @@ async def announceerror(ctx, error):
         )
     else:
         result = handle_error(error)
-        await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
+        await ctx.respond(f"```fix\n{result[0]}```", embeds=result[1])
 
 
 @bot.slash_command(name="info", description="Get the info of the bot")
@@ -353,7 +350,7 @@ async def say_error(ctx, error):
         )
     else:
         result = handle_error(error)
-        await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
+        await ctx.respond(f"```fix\n{result[0]}```", embeds=result[1])
 
 
 @bot.slash_command(name="invite", description="Invite the bot to your server!")

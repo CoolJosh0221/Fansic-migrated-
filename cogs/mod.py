@@ -65,7 +65,7 @@ class Mod(commands.Cog):
             )
         else:
             result = handle_error(error)
-            await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
+            await ctx.respond(f"```fix\n{result[0]}```", embeds=result[1])
 
     @commands.slash_command(name="unmute", description="unmutes/untimeouts a member")
     @commands.has_permissions(moderate_members=True)
@@ -92,7 +92,7 @@ class Mod(commands.Cog):
             )
         else:
             result = handle_error(error)
-            await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
+            await ctx.respond(f"```fix\n{result[0]}```", embeds=result[1])
 
     @commands.slash_command(name="lock", description="Lock the channel")
     @commands.has_permissions(manage_channels=True)
@@ -138,7 +138,7 @@ class Mod(commands.Cog):
             )
         else:
             result = handle_error(error)
-            await ctx.respond(f"```fix\n{result[0]}```", embed=result[1])
+            await ctx.respond(f"```fix\n{result[0]}```", embeds=result[1])
 
 
 def setup(bot):
