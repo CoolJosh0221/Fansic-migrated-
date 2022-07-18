@@ -111,7 +111,7 @@ class Mod(commands.Cog):
         await ctx.respond("Channel has been unlocked", ephemeral=True)
 
     @commands.slash_command(name="kick", description="Kicks a member from the server")
-    @commands.has_permissions(manage_members=True)
+    @commands.has_permissions(moderate_members=True)
     async def kick(self, ctx, member: Option(discord.Member, required=True), reason: Option(str) = None):
         if reason == None:
             reason = "No reason provided"
