@@ -40,6 +40,10 @@ class Mod(commands.Cog):
                 "I can't mute someone for more than 28 days!", ephemeral=True
             )  # responds, but only the author can see the response
             return
+
+        if member.top_role.position > ctx.guild.get_member(self.bot.user.id).top_role.position:
+            await ctx.respond("Failed: My role is lower than that member!")
+
         if reason == None:
             await member.timeout_for(duration)
             await ctx.respond(
@@ -75,6 +79,9 @@ class Mod(commands.Cog):
         member: Option(discord.Member, required=True),
         reason: Option(str, required=False),
     ):
+        if member.top_role.position > ctx.guild.get_member(self.bot.user.id).top_role.position:
+            await ctx.respond("Failed: My role is lower than that member!")
+            return
         if reason == None:
             await member.remove_timeout()
             await ctx.respond(f"<@{member.id}> has been untimed out by <@{ctx.author.id}>.")
@@ -115,23 +122,25 @@ class Mod(commands.Cog):
     async def kick(self, ctx, member: Option(discord.Member, required=True), reason: Option(str) = None):
         if reason == None:
             reason = "No reason provided"
+        if member.guild_permissions.moderate_members:
+            await ctx.respond("You can't do this, this person is a moderator!")
+            return
+        if ctx.author == member:
+            await ctx.respond("You can't kick yourself, leave this server instead 😆")
+            return
+        if member not in ctx.guild.members:
+            await ctx.respond("You can't kick a user that is not in this server!")
+            return
+        if member.top_role.position > ctx.guild.get_member(self.bot.user.id).top_role.position:
+            await ctx.respond("Failed: My role is lower than that member!")
+            return
         if member in ctx.guild.members:
             await ctx.guild.kick(member)
             await ctx.respond(f'User {member.mention} has been kicked for {reason} by {ctx.author.mention}')
-        elif member.guild_permissions.moderate_members:
-            await ctx.respond("You can't do this, this person is a moderator!")
-            return
-        elif ctx.author == member:
-            await ctx.respond("You can't kick yourself, leave this server instead 😆")
-            return
-        elif member not in ctx.guild.members:
-            await ctx.respond("You can't kick a user that is not in this server!")
-            return
-        else:
-            pass
 
     @kick.error
     async def timeouterror(self, ctx, error):
+        print(error.original)
         if isinstance(error, MissingPermissions):
             await ctx.respond(
                 "You can't do this! You need to have moderate members permissions!"

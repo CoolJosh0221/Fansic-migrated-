@@ -9,7 +9,7 @@ def handle_error(error_msg):
     )
     embed2 = discord.Embed(
         title="Missing Permissions",
-        description="If you have problems with missing permissions but you are the server owner, please go to server setting, create a new role, apply administrator permissions, and then add the role to yourself.",
+        description="If you have problems with missing permissions, place the \"Fansic\"role on the top of the roles you want. If this still doesn't work for you, join the server above.",
         color=0x00EAFF
     )
 
