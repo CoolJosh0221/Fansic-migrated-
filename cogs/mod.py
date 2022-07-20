@@ -41,7 +41,7 @@ class Mod(commands.Cog):
             )  # responds, but only the author can see the response
             return
 
-        if member.top_role.position > ctx.guild.get_member(self.bot.user.id).top_role.position:
+        if member.top_role.position >= ctx.guild.get_member(self.bot.user.id).top_role.position:
             await ctx.respond("Failed: My role is lower than that member!")
 
         if reason == None:
@@ -79,7 +79,7 @@ class Mod(commands.Cog):
         member: Option(discord.Member, required=True),
         reason: Option(str, required=False),
     ):
-        if member.top_role.position > ctx.guild.get_member(self.bot.user.id).top_role.position:
+        if member.top_role.position >= ctx.guild.get_member(self.bot.user.id).top_role.position:
             await ctx.respond("Failed: My role is lower than that member!")
             return
         if reason == None:
@@ -131,7 +131,7 @@ class Mod(commands.Cog):
         if member not in ctx.guild.members:
             await ctx.respond("You can't kick a user that is not in this server!")
             return
-        if member.top_role.position > ctx.guild.get_member(self.bot.user.id).top_role.position:
+        if member.top_role.position >= ctx.guild.get_member(self.bot.user.id).top_role.position:
             await ctx.respond("Failed: My role is lower than that member!")
             return
         if member in ctx.guild.members:
