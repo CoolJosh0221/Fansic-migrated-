@@ -3,6 +3,7 @@ from customized_functions.handle_error import handle_error
 import asyncio
 import os
 import random
+import logging
 from datetime import datetime, timedelta
 
 import asyncpg
@@ -14,6 +15,16 @@ from discord import Option
 from discord.ext import commands
 from discord.ext.commands import MissingPermissions
 from discord.ui import Button, InputText, Modal, View
+import sys
+from io import StringIO
+
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s',
+                              '%m-%d-%Y %H:%M:%S')
+log_stream = StringIO()
+logging.basicConfig(stream=log_stream, level=logging.INFO)
 
 load_dotenv()  # load the dotenv module to prevent tokens from being seen by others
 profanity.load_censor_words()
