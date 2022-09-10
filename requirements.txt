@@ -4,4 +4,3 @@ python-dotenv
 py-cord
 asyncpg
 better_profanity
-logging
