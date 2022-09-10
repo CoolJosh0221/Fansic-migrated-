@@ -56,13 +56,12 @@ async def on_ready():
     print(f"We have logged in as {bot.user}.")
     print("Bot is now ready!")
     print("================================================================\n\n")
-    logging_channel = bot.get_channel(1018080842507108362)
-    file = discord.File("discord.log")
 
     while True:
-        await logging_channel.send(file=file)
+        await bot.get_channel(1018080842507108362).send(file=discord.File("discord.log"))
         f = open('discord.log', 'r+')
         f.truncate(0)
+        f.close()
         await bot.change_presence(
             status=discord.Status.streaming,
             activity=discord.Streaming(
