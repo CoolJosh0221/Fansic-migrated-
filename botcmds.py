@@ -61,7 +61,8 @@ async def on_ready():
 
     while True:
         await logging_channel.send(file=file)
-        open("discord.log", "w").close()
+        f = open('discord.log', 'r+')
+        f.truncate(0)
         await bot.change_presence(
             status=discord.Status.streaming,
             activity=discord.Streaming(
