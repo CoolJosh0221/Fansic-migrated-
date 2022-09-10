@@ -58,11 +58,14 @@ async def on_ready():
     print("================================================================\n\n")
 
     while True:
-        if not os.stat("discord.log").st_size == 0:
+        try:
             await bot.get_channel(1018080842507108362).send(file=discord.File("discord.log"), content="\n")
             f = open('discord.log', 'r+')
             f.truncate(0)
             f.close()
+        except discord.errors.HTTPException:
+            pass
+
         await bot.change_presence(
             status=discord.Status.streaming,
             activity=discord.Streaming(
