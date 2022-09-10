@@ -139,11 +139,29 @@ class Mod(commands.Cog):
             await ctx.respond(f'User {member.mention} has been kicked for {reason} by {ctx.author.mention}')
 
     @kick.error
-    async def timeouterror(self, ctx, error):
+    async def kickerror(self, ctx, error):
         print(error.original)
         if isinstance(error, MissingPermissions):
             await ctx.respond(
                 "You can't do this! You need to have moderate members permissions!"
+            )
+        else:
+            result = handle_error(error)
+            await ctx.respond(f"```fix\n{result[0]}```", embeds=result[1])
+
+    @commands.slash_command(name="clear", description="Delete a channel's messages.")
+    @commands.has_permissions(manage_messages=True)
+    async def clear(self, ctx, amount: Option(int, required=True, description="Amount of messages to clear.")):
+        await ctx.channel.purge(limit=amount)
+        await ctx.send('Cleared by {ctx.author.mention}')
+        await ctx.message.delete()
+
+    @clear.error
+    async def timeouterror(self, ctx, error):
+        print(error.original)
+        if isinstance(error, MissingPermissions):
+            await ctx.respond(
+                "You can't do this! You need to have manage messages permissions!"
             )
         else:
             result = handle_error(error)
