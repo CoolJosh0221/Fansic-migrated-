@@ -16,15 +16,24 @@ from discord.ext import commands
 from discord.ext.commands import MissingPermissions
 from discord.ui import Button, InputText, Modal, View
 import sys
-from io import StringIO
 
+import logging.handlers
 
-logger = logging.getLogger()
+logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s',
-                              '%m-%d-%Y %H:%M:%S')
-log_stream = StringIO()
-logging.basicConfig(stream=log_stream, level=logging.INFO)
+logging.getLogger('discord.http').setLevel(logging.INFO)
+
+handler = logging.handlers.RotatingFileHandler(
+    filename='discord.log',
+    encoding='utf-8',
+    maxBytes=32 * 1024 * 1024,  # 32 MiB
+    backupCount=5,  # Rotate through 5 files
+)
+dt_fmt = '%Y-%m-%d %H:%M:%S'
+formatter = logging.Formatter(
+    '[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 load_dotenv()  # load the dotenv module to prevent tokens from being seen by others
 profanity.load_censor_words()
@@ -47,8 +56,11 @@ async def on_ready():
     print(f"We have logged in as {bot.user}.")
     print("Bot is now ready!")
     print("================================================================\n\n")
+    logging_channel = bot.get_channel(1018080842507108362)
+    file = discord.File("discord.log")
 
     while True:
+        await logging_channel.send(file=file)
         await bot.change_presence(
             status=discord.Status.streaming,
             activity=discord.Streaming(
@@ -376,4 +388,4 @@ for file in os.listdir("cogs"):
 
 
 token = str(os.getenv("TOKEN"))
-bot.run(token)
+bot.run(token, log_handler=None)
