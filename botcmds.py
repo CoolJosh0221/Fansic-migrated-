@@ -389,4 +389,4 @@ for file in os.listdir("cogs"):
 
 
 token = str(os.getenv("TOKEN"))
-bot.run(token, log_handler=None)
+bot.run(token)
