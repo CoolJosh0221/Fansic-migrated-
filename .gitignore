@@ -1,8 +1,8 @@
 #*.json
 *.py[cod]
-*.log
 *.egg-info
 venv/
+*.log
 .venv/
 docs/_build
 docs/crowdin.py
