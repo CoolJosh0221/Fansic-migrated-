@@ -58,7 +58,7 @@ async def on_ready():
     print("================================================================\n\n")
 
     while True:
-        await bot.get_channel(1018080842507108362).send(file=discord.File("discord.log"))
+        await bot.get_channel(1018080842507108362).send(file=discord.File("discord.log"), content="\n")
         f = open('discord.log', 'r+')
         f.truncate(0)
         f.close()
