@@ -154,7 +154,6 @@ class Mod(commands.Cog):
     async def clear(self, ctx, amount: Option(int, required=True, description="Amount of messages to clear.")):
         await ctx.channel.purge(limit=amount)
         await ctx.send('Cleared by {ctx.author.mention}')
-        await ctx.message.delete()
 
     @clear.error
     async def timeouterror(self, ctx, error):
