@@ -6,7 +6,6 @@ import random
 import logging
 from datetime import datetime, timedelta
 
-import asyncpg
 from better_profanity import profanity
 from dotenv import load_dotenv
 
