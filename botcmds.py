@@ -46,9 +46,9 @@ intents.message_content = True
 bot = discord.Bot(intents=intents)
 
 
-async def connect():
-    sql = str(os.getenv("SQL"))
-    conn = await asyncpg.connect(sql)
+# async def connect():
+#     sql = str(os.getenv("SQL"))
+#     conn = await asyncpg.connect(sql)
 
 
 @bot.event
