@@ -3,3 +3,4 @@ async-timeout
 python-dotenv
 py-cord
 better_profanity
+yarl
