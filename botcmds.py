@@ -1,4 +1,3 @@
-from discord import guild
 from customized_functions.handle_error import handle_error
 import asyncio
 import os
