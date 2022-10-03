@@ -1,7 +1,9 @@
+import motor.motor_asyncio
 from customized_functions.handle_error import handle_error
 import asyncio
 import os
 import random
+import __main__
 import logging
 from datetime import datetime, timedelta
 
@@ -44,9 +46,19 @@ intents.message_content = True
 bot = discord.Bot(intents=intents)
 
 
-# async def connect():
-#     sql = str(os.getenv("SQL"))
-#     conn = await asyncpg.connect(sql)
+async def get_server_info():
+    # replace this with your MongoDB connection string
+    conn_str = f"mongodb+srv://josh:{os.getenv('mongo_pwd')}@fansic.dwvvufz.mongodb.net/?retryWrites=true&w=majority"
+    # set a 5-second connection timeout
+    client = motor.motor_asyncio.AsyncIOMotorClient(
+        conn_str, serverSelectionTimeoutMS=5000)
+    try:
+        print(await client.server_info())
+        print(f"File {__main__.__file__} successfully connected to the server")
+    except Exception:
+        print("Unable to connect to the server.")
+loop = asyncio.get_event_loop()
+loop.run_until_complete(get_server_info())
 
 
 @bot.event
