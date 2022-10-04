@@ -31,7 +31,7 @@ async def get_server_info():
         print(await client.server_info())
         print(f"File {__main__.__file__} successfully connected to the server")
     except Exception:
-        print("Unable to connect to the server. Restarting...")
+        print("Unable to connect to the server.")
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 loop.run_until_complete(get_server_info())
@@ -52,7 +52,7 @@ formatter = logging.Formatter(
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-profanity.load_censor_words()
+profanity.load_censor_words(whitelist_words=['god'])
 
 
 intents = discord.Intents.all()
