@@ -30,8 +30,9 @@ async def get_server_info():
     try:
         print(await client.server_info())
         print(f"File {__main__.__file__} successfully connected to the server")
-    except Exception:
+    except Exception as e:
         print("Unable to connect to the server.")
+        print(e.args)
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 loop.run_until_complete(get_server_info())
