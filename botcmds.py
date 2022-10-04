@@ -39,13 +39,6 @@ load_dotenv()  # load the dotenv module to prevent tokens from being seen by oth
 profanity.load_censor_words()
 
 
-intents = discord.Intents.all()
-intents.message_content = True
-
-
-bot = discord.Bot(intents=intents)
-
-
 async def get_server_info():
     # replace this with your MongoDB connection string
     conn_str = f"mongodb+srv://josh:{os.getenv('mongo_pwd')}@fansic.dwvvufz.mongodb.net/?retryWrites=true&w=majority"
@@ -59,6 +52,13 @@ async def get_server_info():
         print("Unable to connect to the server. Restarting...")
 loop = asyncio.get_event_loop()
 loop.run_until_complete(get_server_info())
+
+
+intents = discord.Intents.all()
+intents.message_content = True
+
+
+bot = discord.Bot(intents=intents)
 
 
 @bot.event
