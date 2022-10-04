@@ -18,6 +18,23 @@ from discord.ui import Button, InputText, Modal, View
 import sys
 
 import logging.handlers
+load_dotenv()  # load the dotenv module to prevent tokens from being seen by others
+
+
+async def get_server_info():
+    # replace this with your MongoDB connection string
+    conn_str = f"mongodb+srv://josh:{str(os.getenv('mongo_pwd'))}@fansic.dwvvufz.mongodb.net/?retryWrites=true&w=majority"
+    # set a 5-second connection timeout
+    client = motor.motor_asyncio.AsyncIOMotorClient(
+        conn_str, serverSelectionTimeoutMS=5000)
+    try:
+        print(await client.server_info())
+        print(f"File {__main__.__file__} successfully connected to the server")
+    except Exception:
+        print("Unable to connect to the server. Restarting...")
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(get_server_info())
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -35,24 +52,7 @@ formatter = logging.Formatter(
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-load_dotenv()  # load the dotenv module to prevent tokens from being seen by others
 profanity.load_censor_words()
-
-
-async def get_server_info():
-    # replace this with your MongoDB connection string
-    conn_str = f"mongodb+srv://josh:{str(os.getenv('mongo_pwd'))}@fansic.dwvvufz.mongodb.net/?retryWrites=true&w=majority"
-    # set a 5-second connection timeout
-    client = motor.motor_asyncio.AsyncIOMotorClient(
-        conn_str, serverSelectionTimeoutMS=5000)
-    try:
-        print(await client.server_info())
-        print(f"File {__main__.__file__} successfully connected to the server")
-    except Exception:
-        print("Unable to connect to the server. Restarting...")
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
-loop.run_until_complete(get_server_info())
 
 
 intents = discord.Intents.all()
