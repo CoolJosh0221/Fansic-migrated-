@@ -41,7 +41,7 @@ profanity.load_censor_words()
 
 async def get_server_info():
     # replace this with your MongoDB connection string
-    conn_str = f"mongodb+srv://josh:{os.getenv('mongo_pwd')}@fansic.dwvvufz.mongodb.net/?retryWrites=true&w=majority"
+    conn_str = f"mongodb+srv://josh:{str(os.getenv('mongo_pwd'))}@fansic.dwvvufz.mongodb.net/?retryWrites=true&w=majority"
     # set a 5-second connection timeout
     client = motor.motor_asyncio.AsyncIOMotorClient(
         conn_str, serverSelectionTimeoutMS=5000)
@@ -50,7 +50,8 @@ async def get_server_info():
         print(f"File {__main__.__file__} successfully connected to the server")
     except Exception:
         print("Unable to connect to the server. Restarting...")
-loop = asyncio.get_event_loop()
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
 loop.run_until_complete(get_server_info())
 
 

@@ -1,47 +1,8 @@
-[2022-10-03 07:52:04] [DEBUG   ] discord.gateway: Sending "{"op":3,"d":{"activities":[{"type":1,"name":"in 9 servers","url":"https://www.twitch.tv/mynameisjoshes0221","assets":{},"details":"in 9 servers"}],"afk":false,"since":0.0,"status":"streaming"}}" to change status
-[2022-10-03 07:52:04] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 19, 'op': 0, 'd': {'user': {'username': 'oscar960608', 'id': '846733963039866882', 'discriminator': '1868', 'avatar': 'fa25406afde1021e0ee16622588ee98b'}, 'status': 'dnd', 'guild_id': '992613573987672085', 'client_status': {'mobile': 'dnd'}, 'activities': [{'type': 0, 'timestamps': {'start': 1664754724292}, 'platform': 'samsung', 'name': '世界計畫 繽紛舞台！feat. 初音未來', 'id': '2f916719dd37d094', 'created_at': 1664754724291, 'application_id': '883008671108444250'}]}}
-[2022-10-03 07:52:04] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:04] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:05] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 20, 'op': 0, 'd': {'user': {'id': '996719516778237952'}, 'status': 'online', 'guild_id': '994574050678554624', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': '/help 得到指令清單', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754725287}]}}
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:05] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 21, 'op': 0, 'd': {'user': {'id': '996719516778237952'}, 'status': 'online', 'guild_id': '992613573987672085', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': '/help 得到指令清單', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754725287}]}}
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:05] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 22, 'op': 0, 'd': {'user': {'id': '996719516778237952'}, 'status': 'online', 'guild_id': '898212567636381696', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': '/help 得到指令清單', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754725287}]}}
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:05] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 23, 'op': 0, 'd': {'user': {'id': '996719516778237952'}, 'status': 'online', 'guild_id': '864434261808381952', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': '/help 得到指令清單', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754725287}]}}
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:05] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 24, 'op': 0, 'd': {'user': {'id': '987288451110019082'}, 'status': 'online', 'guild_id': '994574050678554624', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': 'BC BOT 服務 304 伺服器', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754725490}]}}
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:05] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 25, 'op': 0, 'd': {'user': {'id': '987288451110019082'}, 'status': 'online', 'guild_id': '898212567636381696', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': 'BC BOT 服務 304 伺服器', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754725490}]}}
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:05] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 26, 'op': 0, 'd': {'user': {'id': '934467261924794389'}, 'status': 'online', 'guild_id': '994574050678554624', 'client_status': {'web': 'online'}, 'activities': [{'type': 3, 'name': '┃ Server Under Maintenance ┃', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754725800}]}}
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:05] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 27, 'op': 0, 'd': {'user': {'id': '1019623753304506508'}, 'status': 'online', 'guild_id': '992613573987672085', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': '正在服務淺月物語', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754726566}]}}
-[2022-10-03 07:52:06] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:06] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 28, 'op': 0, 'd': {'user': {'id': '854147624604139521'}, 'status': 'online', 'guild_id': '992613573987672085', 'client_status': {'mobile': 'online', 'desktop': 'online'}, 'activities': []}}
-[2022-10-03 07:52:06] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:06] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 29, 'op': 0, 'd': {'user': {'id': '242730576195354624'}, 'status': 'online', 'guild_id': '877823624315301908', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': 'Serving N/A guilds on 112 shards.', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754726049}]}}
-[2022-10-03 07:52:06] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:06] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:07] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 30, 'op': 0, 'd': {'user': {'id': '987358418941657108'}, 'status': 'idle', 'guild_id': '864434261808381952', 'client_status': {'web': 'idle'}, 'activities': [{'type': 0, 'name': '/help 得到指令清單', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754727246}]}}
-[2022-10-03 07:52:07] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:07] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:07] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 31, 'op': 0, 'd': {'user': {'id': '987358418941657108'}, 'status': 'idle', 'guild_id': '994574050678554624', 'client_status': {'web': 'idle'}, 'activities': [{'type': 0, 'name': '/help 得到指令清單', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754727246}]}}
-[2022-10-03 07:52:07] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:07] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:07] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 32, 'op': 0, 'd': {'user': {'id': '987358418941657108'}, 'status': 'idle', 'guild_id': '992613573987672085', 'client_status': {'web': 'idle'}, 'activities': [{'type': 0, 'name': '/help 得到指令清單', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664754727246}]}}
-[2022-10-03 07:52:07] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-03 07:52:07] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-03 07:52:08] [INFO    ] discord.client: Cleaning up tasks.
-[2022-10-03 07:52:08] [INFO    ] discord.client: Cleaning up after 2 tasks.
-[2022-10-03 07:52:08] [INFO    ] discord.client: All tasks finished cancelling.
-[2022-10-03 07:52:08] [INFO    ] discord.client: Closing the event loop.
+[2022-10-04 14:01:43] [DEBUG   ] discord.gateway: Sending "{"op":3,"d":{"activities":[{"type":1,"name":"in 9 servers","url":"https://www.twitch.tv/mynameisjoshes0221","assets":{},"details":"in 9 servers"}],"afk":false,"since":0.0,"status":"streaming"}}" to change status
+[2022-10-04 14:01:43] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 20, 'op': 0, 'd': {'user': {'id': '921673886049910795'}, 'status': 'idle', 'guild_id': '994574050678554624', 'client_status': {'web': 'idle'}, 'activities': [{'url': 'https://discord.gg/AVCWGuuUex', 'type': 3, 'name': '/help | 194 個伺服器', 'id': 'ec0b28a579ecb4bd', 'created_at': 1664863303590}]}}
+[2022-10-04 14:01:43] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2022-10-04 14:01:43] [DEBUG   ] discord.client: Dispatching event presence_update
+[2022-10-04 14:01:45] [INFO    ] discord.client: Cleaning up tasks.
+[2022-10-04 14:01:45] [INFO    ] discord.client: Cleaning up after 2 tasks.
+[2022-10-04 14:01:45] [INFO    ] discord.client: All tasks finished cancelling.
+[2022-10-04 14:01:45] [INFO    ] discord.client: Closing the event loop.
