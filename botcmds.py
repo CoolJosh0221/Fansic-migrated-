@@ -32,9 +32,9 @@ async def get_server_info():
         print(f"File {__main__.__file__} successfully connected to the server")
     except Exception:
         print("Unable to connect to the server. Restarting...")
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(get_server_info())
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+loop.run_until_complete(get_server_info())
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
