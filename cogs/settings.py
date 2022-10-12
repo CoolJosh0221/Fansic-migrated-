@@ -13,6 +13,7 @@ import motor.motor_asyncio
 import os
 
 load_dotenv("../.env")
+config_items = ['swear/curse detector']
 
 
 class Settings(commands.Cog):
@@ -21,11 +22,12 @@ class Settings(commands.Cog):
 
     settings = SlashCommandGroup("settings", "Settings Commands")
 
-    config_items = ['swear/curse detector']
+    async def get_config_items(ctx: discord.AutocompleteContext):
+        return [items for items in config_items if items.startswith(ctx.value.lower())]
 
     @settings.command(name="toggle", description="Toggle settings on/off")
     @commands.has_permissions(administrator=True)
-    async def toggle(self, ctx, setting: Option(str, description="The setting name you want to toggle on/off.", required=True, autocomplete=config_items)):
+    async def toggle(self, ctx, setting: Option(str, description="The setting name you want to toggle on/off.", required=True, autocomplete=get_config_items)):
         if setting == 'swear/curse detector':
             pass
 
