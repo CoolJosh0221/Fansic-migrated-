@@ -25,9 +25,12 @@ class Settings(commands.Cog):
     async def get_config_items(ctx: discord.AutocompleteContext):
         return [items for items in config_items if items.startswith(ctx.value.lower())]
 
-    @settings.command(name="toggle", description="Toggle settings on/off")
+    @settings.command(name="config", description="Change the setting.")
     @commands.has_permissions(administrator=True)
-    async def toggle(self, ctx, setting: Option(str, description="The setting name you want to toggle on/off.", required=True, autocomplete=get_config_items)):
+    async def toggle(self, ctx,
+                     setting: Option(str, description="The setting name you want to change.", required=True, autocomplete=get_config_items),
+
+                     option: Option(str, description="The settings to change.", required=True)):
         if setting == 'swear/curse detector':
             pass
 
