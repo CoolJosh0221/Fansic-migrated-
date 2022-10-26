@@ -31,6 +31,7 @@ class Settings(commands.Cog):
                      setting: Option(str, description="The setting name you want to change.", required=True, autocomplete=get_config_items),
 
                      option: Option(str, description="The settings to change.", required=True)):
+        settings_collection = self.bot.cluster["bot"]["settings"]
         if setting == 'swear/curse detector':
             pass
 

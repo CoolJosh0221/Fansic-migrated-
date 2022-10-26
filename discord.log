@@ -1,20 +1,14 @@
-[2022-10-12 11:20:06] [DEBUG   ] discord.gateway: Sending "{"op":3,"d":{"activities":[{"type":1,"name":"in 10 servers","url":"https://www.twitch.tv/mynameisjoshes0221","assets":{},"details":"in 10 servers"}],"afk":false,"since":0.0,"status":"streaming"}}" to change status
-[2022-10-12 11:20:07] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'MESSAGE_CREATE', 's': 45, 'op': 0, 'd': {'type': 0, 'tts': False, 'timestamp': '2022-10-12T03:20:07.893000+00:00', 'referenced_message': None, 'pinned': False, 'mentions': [], 'mention_roles': [], 'mention_everyone': False, 'member': {'roles': ['925958377656438874', '918478003460276245'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2021-12-09T12:23:40.593000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'avatar': None}, 'id': '1029594290923511868', 'flags': 0, 'embeds': [], 'edited_timestamp': None, 'content': '', 'components': [], 'channel_id': '1018080842507108362', 'author': {'username': 'Fansic', 'public_flags': 0, 'id': '918477034232119306', 'discriminator': '7270', 'bot': True, 'avatar_decoration': None, 'avatar': '93464eae2a829b2ecafdcae34ed6a3e0'}, 'attachments': [{'url': 'https://cdn.discordapp.com/attachments/1018080842507108362/1029594290734772384/discord.log', 'size': 20875, 'proxy_url': 'https://media.discordapp.net/attachments/1018080842507108362/1029594290734772384/discord.log', 'id': '1029594290734772384', 'filename': 'discord.log', 'content_type': 'text/plain; charset=utf-8'}], 'guild_id': '877823624315301908'}}
-[2022-10-12 11:20:07] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-12 11:20:07] [DEBUG   ] discord.client: Dispatching event message
-[2022-10-12 11:20:08] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 46, 'op': 0, 'd': {'user': {'id': '987288451110019082'}, 'status': 'online', 'guild_id': '994574050678554624', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': '~help | www.bcbot.fun', 'id': 'ec0b28a579ecb4bd', 'created_at': 1665544808098}]}}
-[2022-10-12 11:20:08] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-12 11:20:08] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-12 11:20:08] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 47, 'op': 0, 'd': {'user': {'id': '1002430085674049596'}, 'status': 'idle', 'guild_id': '864434261808381952', 'client_status': {'web': 'idle'}, 'activities': [{'type': 0, 'name': '30個群組', 'id': 'ec0b28a579ecb4bd', 'created_at': 1665544808163}]}}
-[2022-10-12 11:20:08] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-12 11:20:08] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-12 11:20:08] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 48, 'op': 0, 'd': {'user': {'id': '987288451110019082'}, 'status': 'online', 'guild_id': '898212567636381696', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': '~help | www.bcbot.fun', 'id': 'ec0b28a579ecb4bd', 'created_at': 1665544808098}]}}
-[2022-10-12 11:20:08] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-12 11:20:08] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-12 11:20:08] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 49, 'op': 0, 'd': {'user': {'id': '467377486141980682'}, 'status': 'online', 'guild_id': '877823624315301908', 'client_status': {'web': 'online'}, 'activities': [{'type': 3, 'name': 'the counting channel • 149,847 global counts this week!', 'id': 'ec0b28a579ecb4bd', 'created_at': 1665544805700}]}}
-[2022-10-12 11:20:08] [DEBUG   ] discord.client: Dispatching event socket_event_type
-[2022-10-12 11:20:08] [DEBUG   ] discord.client: Dispatching event presence_update
-[2022-10-12 11:20:09] [INFO    ] discord.client: Cleaning up tasks.
-[2022-10-12 11:20:09] [INFO    ] discord.client: Cleaning up after 2 tasks.
-[2022-10-12 11:20:10] [INFO    ] discord.client: All tasks finished cancelling.
-[2022-10-12 11:20:10] [INFO    ] discord.client: Closing the event loop.
+[2022-10-26 21:04:51] [DEBUG   ] discord.gateway: Sending "{"op":3,"d":{"activities":[{"type":1,"name":"in 10 servers","url":"https://www.twitch.tv/mynameisjoshes0221","assets":{},"details":"in 10 servers"}],"afk":false,"since":0.0,"status":"streaming"}}" to change status
+[2022-10-26 21:04:51] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 21, 'op': 0, 'd': {'user': {'id': '1019623753304506508'}, 'status': 'online', 'guild_id': '992613573987672085', 'client_status': {'web': 'online'}, 'activities': [{'type': 0, 'name': '正在服務淺月物語', 'id': 'ec0b28a579ecb4bd', 'created_at': 1666789491243}]}}
+[2022-10-26 21:04:51] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2022-10-26 21:04:51] [DEBUG   ] discord.client: Dispatching event presence_update
+[2022-10-26 21:04:52] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 22, 'op': 0, 'd': {'user': {'id': '673780322051293184'}, 'status': 'dnd', 'guild_id': '992613573987672085', 'client_status': {'desktop': 'dnd'}, 'activities': [{'type': 4, 'state': '好累阿幹', 'name': 'Custom Status', 'id': 'custom', 'emoji': {'name': '🖕'}, 'created_at': 1666789492414}, {'type': 0, 'timestamps': {'start': 1666786698000}, 'state': 'Multiplayer', 'party': {}, 'name': 'Feather', 'id': 'fe86aacadf975b5a', 'created_at': 1666789492414, 'assets': {'large_text': 'Feather Client', 'large_image': '903805708456321116'}, 'application_id': '903733444876582983'}]}}
+[2022-10-26 21:04:52] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2022-10-26 21:04:52] [DEBUG   ] discord.client: Dispatching event presence_update
+[2022-10-26 21:04:53] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 23, 'op': 0, 'd': {'user': {'id': '940545053401702430'}, 'status': 'dnd', 'guild_id': '877823624315301908', 'client_status': {'web': 'dnd'}, 'activities': [{'type': 4, 'state': '阿好慘', 'name': 'Custom Status', 'id': 'custom', 'emoji': {'name': '🥶'}, 'created_at': 1666789492924}]}}
+[2022-10-26 21:04:53] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2022-10-26 21:04:53] [DEBUG   ] discord.client: Dispatching event presence_update
+[2022-10-26 21:04:53] [INFO    ] discord.client: Cleaning up tasks.
+[2022-10-26 21:04:53] [INFO    ] discord.client: Cleaning up after 2 tasks.
+[2022-10-26 21:04:53] [INFO    ] discord.client: All tasks finished cancelling.
+[2022-10-26 21:04:53] [INFO    ] discord.client: Closing the event loop.
