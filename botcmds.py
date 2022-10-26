@@ -45,7 +45,7 @@ intents.message_content = True
 
 bot = discord.Bot(intents=intents)
 bot.cluster = motor.motor_asyncio.AsyncIOMotorClient(
-    f"mongodb+srv://josh:{str(os.getenv('mongo_pwd'))}@fansic.dwvvufz.mongodb.net/?retryWrites=true&w=majority", serverSelectionTimeoutMS=5000)
+    f"mongodb+srv://josh:{str(os.getenv('mongo_pwd'))}@fansic.dwvvufz.mongodb.net/?retryWrites=true&w=majority&authSource=admin", serverSelectionTimeoutMS=5000)
 print(bot.cluster.info)
 
 
